@@ -23,7 +23,7 @@ export class AppInsightsService implements OnModuleInit {
             .setAutoCollectIncomingRequestAzureFunctions(true)
             .setInternalLogging(false, true)
             .setDistributedTracingMode(ApplicationInsights.DistributedTracingModes.AI_AND_W3C)
-            .enableWebInstrumentation(false)
+            .enableWebInstrumentation(true)
             .start();
 
         this.client = ApplicationInsights.defaultClient;
