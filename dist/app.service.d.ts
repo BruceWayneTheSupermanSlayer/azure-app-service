@@ -1,3 +1,6 @@
+import { AppInsightsService } from './gcs-logger';
 export declare class AppService {
-    getHello(): string;
+    private readonly logger;
+    constructor(logger: AppInsightsService);
+    getHello(): Record<string, string>;
 }
