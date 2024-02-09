@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Push to Azure
+name: Build and deploy container app to Azure Web App - app-service-docker-container
 
 on:
   push:
@@ -23,19 +23,15 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_PASSWORD}}
+        username: ${{ secrets.AzureAppService_ContainerUsername_54856dd76e6d41bf8db2e0f76d32f926 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_f77f9b9e3ecb46ea80c71e4e8094f100 }}
 
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v5.1.0
+    - name: Build and push container image to registry
+      uses: docker/build-push-action@v3
       with:
-        context: .
-        file: ./Dockerfile
-        platforms: linux/amd64,linux/arm64
         push: true
-        tags: |
-          kumarnwb/azure-app-service-container:latest
-    
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_54856dd76e6d41bf8db2e0f76d32f926 }}/kumarnwb/azure-app-service-container:${{ github.sha }}
+        file: ./Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,5 +47,5 @@ jobs:
       with:
         app-name: 'app-service-docker-container'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: 'kumarnwb/azure-app-service-container:latest'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_77a5ad9aebe44aaaa13faf5abd04f622 }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_54856dd76e6d41bf8db2e0f76d32f926 }}/kumarnwb/azure-app-service-container:${{ github.sha }}'
