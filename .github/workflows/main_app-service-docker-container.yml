@@ -49,7 +49,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'azure-app-service-container'
+        app-name: 'app-service-docker-container'
         slot-name: 'production'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: 'kumarnwb/azure-app-service-container:latest'
