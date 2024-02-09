@@ -6,8 +6,8 @@ import { SeverityLevel } from 'applicationinsights/out/Declarations/Contracts';
 export class AppService {
   constructor(private readonly logger: AppInsightsService) { }
   getHello(): Record<string, string> {
-    this.logger.info(`💪💪💪💪💪💪💪💪💪💪💪💪💪💪`, SeverityLevel.Error)
+    this.logger.info(`👻👻👻👻👻👻👻👻👻👻👻👻👻👻`, SeverityLevel.Error)
 
-    return { message: "💪💪💪💪💪💪💪💪💪💪💪💪💪💪" };
+    return { message: "👻👻👻👻👻👻👻👻👻👻👻👻👻👻👻" };
   }
 }
